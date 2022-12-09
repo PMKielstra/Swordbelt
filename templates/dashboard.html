@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Swordbelt</title>
+    </head>
+    <body>
+        <div class="commentaries-list">
+            {% for c in commentaries %}
+            <div class="list-item">
+                <a href="/edit/{{ c.id }}" class="commentary-title-link">{{ c.title }}</a>
+                <a href="?delete={{ c.id }}" class="commentary-delete-link">Delete</a>
+            </div>
+            {% endfor %}
+        </div>
+    </body>
+</html>

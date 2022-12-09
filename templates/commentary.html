@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ commentary.title }}</title>
+    </head>
+    <body>
+        <article class="commentary">
+            <h1>{{ commentary.title }}</h1>
+            <h2>{{ commentary.author }}</h2>
+
+            {% for block, passage in blocks_passages %}
+                {{ passage|safe }}
+                {{ block.uninspired_html|safe }}
+            {% endfor %}
+        </article>
+        <footer class="copyright">
+            {{ copyright|safe }}
+        </footer>
+    </body>
+</html>

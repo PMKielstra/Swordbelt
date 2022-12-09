@@ -1,0 +1,6 @@
+[submodule "Benny"]
+	path = Benny
+	url = https://github.com/PMKielstra/Benny
+[submodule "MiGUBA"]
+	path = MiGUBA
+	url = https://github.com/PMKielstra/MiGUBA

@@ -1,0 +1,9 @@
+{% set ns = namespace(first=True) %}
+{% for p in passage %}
+    <p class="scripture">
+    {% for chapter, verse_number, verse in p %}
+        {% if ns.first or (verse_number == 1) %}<span class="chapter">{{chapter}}</span> {% endif %}<span class="verse">{{verse_number}}</span>{{verse}}
+        {% set ns.first = False %}
+    {% endfor %}
+    </p>
+{% endfor %}
