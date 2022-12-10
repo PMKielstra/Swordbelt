@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Swordbelt</title>
+        <script type="text/javascript" src="{{ url_for('static', 'libs/knockout-3.5.1.js')" />
+        <script type="text/javascript" src="{{ url_for('static', 'libs/ckeditor.js') }}" /> <!-- CKEditor license available at {{ url_for('static', 'libs/CKEditor-LICENSE.md') }} -->
+        <script type="text/javascript" src="{{ url_for('static', 'js/editor.js') }}" />
+        <script type="text/javascript">
+            commentary = [
+                {% for block in blocks %}
+                    {
+                        "uninspired": "{{ block.uninspired_html|safe }}",
+                        "book": "{{ block.book }}",
+                        "start_chapter": "{{ block.start_chapter }}",
+                        "start_verse": "{{ block.start_verse }}",
+                        "end_chapter": "{{ block.end_chapter }}",
+                        "end_verse": "{{ block.end_verse }}",
+                        "db_id": "{{ block.id }}",
+                        "order": "{{ block.order }}"
+                    }{% if not loop.last %},{% endif %}
+                {% endfor %}
+            ];
+            max_order = commentary[commentary.length - 1].order;
+        </script>
+    </head>
+    <body>
+        <form method="post" class="edit-form">
+            <div class="edit-block" data-bind="foreach: commentary">
+                <input type="select" data-bind="attr: { id: bookid(order), value: book }">
+                    <option value="GEN">Genesis</option>
+                    <option value="EXO">Exodus</option>
+                    <option value="LEV">Leviticus</option>
+                    <option value="NUM">Numbers</option>
+                    <option value="DEU">Deuteronomy</option>
+                    <option value="JOS">Joshua</option>
+                    <option value="JDG">Judges</option>
+                    <option value="RUT">Ruth</option>
+                    <option value="1SA">1 Samuel</option>
+                    <option value="2SA">2 Samuel</option>
+                    <option value="1KI">1 Kings</option>
+                    <option value="2KI">2 Kings</option>
+                    <option value="1CH">1 Chronicles</option>
+                    <option value="2CH">2 Chronicles</option>
+                    <option value="EZR">Ezra</option>
+                    <option value="NEH">Nehemiah</option>
+                    <option value="EST">Esther</option>
+                    <option value="JOB">Job</option>
+                    <option value="PSA">Psalms</option>
+                    <option value="PRO">Proverbs</option>
+                    <option value="ECC">Ecclesiastes</option>
+                    <option value="SNG">Song of Solomon</option>
+                    <option value="ISA">Isaiah</option>
+                    <option value="JER">Jeremiah</option>
+                    <option value="LAM">Lamentations</option>
+                    <option value="EZK">Ezekiel</option>
+                    <option value="DAN">Daniel</option>
+                    <option value="HOS">Hosea</option>
+                    <option value="JOL">Joel</option>
+                    <option value="AMO">Amos</option>
+                    <option value="OBA">Obadiah</option>
+                    <option value="JON">Jonah</option>
+                    <option value="MIC">Micah</option>
+                    <option value="NAM">Nahum</option>
+                    <option value="HAB">Habakkuk</option>
+                    <option value="ZEP">Zephaniah</option>
+                    <option value="HAG">Haggai</option>
+                    <option value="ZEC">Zechariah</option>
+                    <option value="MAL">Malachi</option>
+                    <option value="MAT">Matthew</option>
+                    <option value="MRK">Mark</option>
+                    <option value="LUK">Luke</option>
+                    <option value="JHN">John</option>
+                    <option value="ACT">Acts</option>
+                    <option value="ROM">Romans</option>
+                    <option value="1CO">1 Corinthians</option>
+                    <option value="2CO">2 Corinthians</option>
+                    <option value="GAL">Galatians</option>
+                    <option value="EPH">Ephesians</option>
+                    <option value="PHP">Philippians</option>
+                    <option value="COL">Colossians</option>
+                    <option value="1TH">1 Thessalonians</option>
+                    <option value="2TH">2 Thessalonians</option>
+                    <option value="1TI">1 Timothy</option>
+                    <option value="2TI">2 Timothy</option>
+                    <option value="TIT">Titus</option>
+                    <option value="PHM">Philemon</option>
+                    <option value="HEB">Hebrews</option>
+                    <option value="JAS">James</option>
+                    <option value="1PE">1 Peter</option>
+                    <option value="2PE">2 Peter</option>
+                    <option value="1JN">1 John</option>
+                    <option value="2JN">2 John</option>
+                    <option value="3JN">3 John</option>
+                    <option value="JUD">Jude</option>
+                    <option value="REV">Revelation</option>
+                </input>
+                <input type="number" data-bind="attr: { id: startchapterid(order), value: start_chapter }" />
+                <input type="number" data-bind="attr: { id: startverseid(order), value: start_verse }" />
+                <input type="number" data-bind="attr: { id: endchapterid(order), value: end_chapter }" />
+                <input type="number" data-bind="attr: { id: endverseid(order), value: end_verse }" />
+                <textarea data-bind="attr: { id: uninspiredid(order) }, text: uninspired">
+                    
+                </textarea>
+                <input type="button" data-bind="attr: { onclick: make_add(order) }" value="Add" />
+            </div>
+            <input type="submit" value="Save">
+        </form>
+    </body>
+</html>
